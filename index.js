@@ -43,6 +43,9 @@ class CheckboxForm extends Component {
     iconSize: PropTypes.number,
     iconColor: PropTypes.string,
     onChecked: PropTypes.func,
+    justifyForm: PropTypes.string,
+    alignItemsForm: PropTypes.string,
+    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -53,6 +56,9 @@ class CheckboxForm extends Component {
     itemCheckedKey: 'checked',
     iconSize: 20,
     iconColor: '#2f86d5',
+    justifyForm: 'center', 
+    alignItemsForm: 'center',
+    disabled: false
   };
 
   _onPress(item, i) {
@@ -76,13 +82,14 @@ class CheckboxForm extends Component {
           item[itemCheckedKey] = !isChecked;
           this._onPress(item, i);
         }}
+        disabled= {this.props.disabled}
       >
         <View
           style={{ flexDirection: this.props.labelHorizontal ? 'row' : 'column',
-            justifyContent: 'center', alignItems: 'center' }}
+            justifyContent: this.props.justifyForm, alignItems: this.props.alignItemsForm }}
         >
           <Icon
-            name={isChecked ? 'md-checkbox' : 'ios-square-outline'}
+            name={isChecked ? 'md-checkbox-outline' : 'md-square-outline'}
             size={iconSize}
             color={iconColor}
           />
@@ -101,7 +108,7 @@ class CheckboxForm extends Component {
       <ScrollView
         {...this.props}
         horizontal={ this.props.formHorizontal}
-        style={[{ width: WINDOW_WIDTH }, this.props.style]}
+        style={this.props.style}
       >
         {
           this.state.dataSource.map((item, i) => this.renderCheckItem(item, i))
