@@ -42,6 +42,7 @@ class CheckboxForm extends Component {
     itemCheckedKey: PropTypes.string,
     iconSize: PropTypes.number,
     iconColor: PropTypes.string,
+    iconColorUnCheck: PropTypes.string,
     onChecked: PropTypes.func,
     justifyForm: PropTypes.string,
     alignItemsForm: PropTypes.string,
@@ -56,6 +57,7 @@ class CheckboxForm extends Component {
     itemCheckedKey: 'checked',
     iconSize: 20,
     iconColor: '#2f86d5',
+    iconColorUnCheck: '#2f86d5',
     justifyForm: 'center', 
     alignItemsForm: 'center',
     disabled: false
@@ -72,7 +74,7 @@ class CheckboxForm extends Component {
   }
 
   renderCheckItem(item, i) {
-    const { itemShowKey, itemCheckedKey, iconSize, iconColor, textStyle } = this.props;
+    const { itemShowKey, itemCheckedKey, iconSize, iconColor, iconColorUnCheck, textStyle } = this.props;
     const isChecked = item[itemCheckedKey] || false;
 
     return (
@@ -91,7 +93,7 @@ class CheckboxForm extends Component {
           <Icon
             name={isChecked ? 'md-checkbox-outline' : 'md-square-outline'}
             size={iconSize}
-            color={iconColor}
+            color={isChecked ? iconColor:iconColorUnCheck}
           />
           <View
             style={{ marginLeft: 5 }}
